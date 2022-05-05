@@ -66,7 +66,7 @@ createDoc = async (req, res) => {
   } else if (req.socket.localPort == 6004) {
     newDocId = newDocId + (currentInstance + 4);
   }
-
+  console.log("new doc id: ", newDocId);
   // SET TO REDIS
   // await redisClient.set(newDocId, req.socket.localPort)
   // console.log(`Port is: ${req.socket.localPort}`)
