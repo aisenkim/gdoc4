@@ -1,0 +1,85 @@
+version: "3"
+services:
+  image_service:
+    build: ./image-service
+    ports:
+      - "7000:7000"
+    networks:
+      - mongo-compose-network
+  gdoc1:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6000
+    environment:
+      PORT: 6000
+    ports:
+      - "6000:6000"
+    networks:
+      - mongo-compose-network
+  sharedb1:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8080
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - mongo-compose-network
+  gdoc2:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6001
+    environment:
+      PORT: 6001
+    ports:
+      - "6001:6001"
+    networks:
+      - mongo-compose-network
+  sharedb2:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8081
+    environment:
+      PORT: 8081
+    ports:
+      - "8081:8081"
+    networks:
+      - mongo-compose-network
+  gdoc3:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6002
+    environment:
+      PORT: 6002
+    ports:
+      - "6002:6002"
+    networks:
+      - mongo-compose-network
+  sharedb3:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8082
+    environment:
+      PORT: 8082
+    ports:
+      - "8082:8082"
+    networks:
+      - mongo-compose-network
+  user:
+    build:
+      context: ./user-service
+      args:
+        PORT: 8000
+    environment:
+      PORT: 8000
+    network_mode: host
+networks:
+  mongo-compose-network:
+    driver: bridge
