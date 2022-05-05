@@ -131,7 +131,7 @@ getDocEs = async (req, res) => {
         });
       });
 
-      cacheQueue.push(resultArr);
+      cacheQueue.push({ key: searchText.trim(), value: resultArr });
 
       return res.json(resultArr);
     })
@@ -146,10 +146,10 @@ getDocEs = async (req, res) => {
 
 // KEY - query, Value - value
 setIntervalAsync(async () => {
-  for (let resultArr of cacheQueue) {
-    if (resultArr.length > 0) {
-      let result = JSON.stringify({ result: resultArr });
-      await redisClient.set(searchText.trim(), result);
+  for (let queryObj of cacheQueue) {
+    if (queryObj.value.length > 0) {
+      let result = JSON.stringify({ result: query.value });
+      await redisClient.set(queryObj.key, result);
     }
     cacheQueue.shift();
   }

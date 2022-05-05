@@ -7,13 +7,30 @@ services:
     container_name: gdoc_mongo
     networks:
       - mongo-compose-network
-  # redis:
-  #   image: redis:6.2-alpine
-  #   restart: always
-  #   ports:
-  #     - '6379:6379'
-  #   networks:
-  #     - mongo-compose-network
+  gdoc1:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6000
+    environment:
+      PORT: 6000
+    ports:
+      - "6000:6000"
+    depends_on:
+      - mongodb
+    networks:
+      - mongo-compose-network
+  sharedb1:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8080
+    environment:
+      PORT: 8080
+    ports:
+      - "8080:8080"
+    networks:
+      - mongo-compose-network
 networks:
   mongo-compose-network:
     driver: bridge
