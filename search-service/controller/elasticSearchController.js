@@ -13,7 +13,7 @@ const esClient = elasticSearch.Client({
 // })
 
 const cacheQueue = [];
-const redisClient = Redis.createClient({ url: "redis://209.94.58.216" });
+const redisClient = Redis.createClient({ url: "redis://209.94.58.216:6379" });
 redisClient.connect();
 
 /**
