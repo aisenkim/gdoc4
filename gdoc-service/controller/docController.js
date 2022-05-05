@@ -56,15 +56,25 @@ createDoc = async (req, res) => {
   // AT THIS POINT, DOC DOESN'T EXIST BY THE NAME (MAX = 8)
   let newDocId = uuidv4(); // generate new id for doc
   if (req.socket.localPort == 6000) {
-    newDocId = newDocId + (currentInstance + 0);
+    let endId = parseInt(currentInstance) + 0;
+    console.log("endid: ", endId);
+    newDocId = newDocId + endId;
   } else if (req.socket.localPort == 6001) {
-    newDocId = newDocId + (currentInstance + 1);
+    let endId = parseInt(currentInstance) + 1;
+    console.log("endid: ", endId);
+    newDocId = newDocId + endId;
   } else if (req.socket.localPort == 6002) {
-    newDocId = newDocId + (currentInstance + 2);
+    let endId = parseInt(currentInstance) + 2;
+    console.log("endid: ", endId);
+    newDocId = newDocId + endId;
   } else if (req.socket.localPort == 6003) {
-    newDocId = newDocId + (currentInstance + 3);
+    let endId = parseInt(currentInstance) + 3;
+    console.log("endid: ", endId);
+    newDocId = newDocId + endId;
   } else if (req.socket.localPort == 6004) {
-    newDocId = newDocId + (currentInstance + 4);
+    let endId = parseInt(currentInstance) + 4;
+    console.log("endid: ", endId);
+    newDocId = newDocId + endId;
   }
   console.log("new doc id: ", newDocId);
   // SET TO REDIS
