@@ -6,9 +6,9 @@ const QuillDeltaToHtmlConverter =
   require("quill-delta-to-html").QuillDeltaToHtmlConverter;
 const richText = require("rich-text");
 const { stripHtml } = require("string-strip-html");
-const Redis = require("redis");
 const { createDocEs } = require("./elasticSearchController");
 const { setIntervalAsync } = require("set-interval-async/dynamic");
+const Redis = require("redis");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -374,7 +374,7 @@ setIntervalAsync(async () => {
     await createDocEs(docId, docNameMap.get(docId), contentStr);
     docUpdateSet.delete(docId);
   }
-}, 3500);
+}, 2500);
 
 /**
  * req.body - { index, length }
