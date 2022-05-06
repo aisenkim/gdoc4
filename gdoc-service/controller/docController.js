@@ -364,7 +364,7 @@ setIntervalAsync(async () => {
     await createDocEs(docId, docNameMap.get(docId), contentStr);
     docUpdateSet.delete(docId);
   }
-}, 10000);
+}, 7500);
 
 /**
  * req.body - { index, length }

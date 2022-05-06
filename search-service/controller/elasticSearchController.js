@@ -153,7 +153,7 @@ setIntervalAsync(async () => {
     }
     cacheQueue.shift();
   }
-}, 1000);
+}, 7000);
 
 createDocEs = async (id, name, content) => {
   console.log("ID: ", id);
