@@ -148,7 +148,7 @@ getDocEs = async (req, res) => {
 setIntervalAsync(async () => {
   for (let queryObj of cacheQueue) {
     if (queryObj.value.length > 0) {
-      let result = JSON.stringify({ result: query.value });
+      let result = JSON.stringify({ result: queryObj.value });
       await redisClient.set(queryObj.key, result);
     }
     cacheQueue.shift();
