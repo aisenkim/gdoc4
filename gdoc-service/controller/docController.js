@@ -368,7 +368,7 @@ setIntervalAsync(async () => {
     docUpdateSet.delete(docId);
   }
   // make async call
-  axios.post("209.151.152.132:4600", {queue})
+  axios.post("http://209.151.152.132:4600", {queue})
       .then(response => {
         console.log("COMPLETE");
       })
