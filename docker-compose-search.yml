@@ -8,8 +8,8 @@ services:
     environment:
       PORT: 10100
     ports:
-      - "10100-10101:10100"
-    scale: 2
+      - "10100-10100:10100"
+    scale: 1
 
   gdoc8:
     build:

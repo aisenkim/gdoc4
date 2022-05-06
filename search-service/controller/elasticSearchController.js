@@ -16,6 +16,9 @@ const esClient = elasticSearch.Client({
 // const redisClient = Redis.createClient({ url: "redis://209.94.58.216:6379" });
 // redisClient.connect();
 
+const searchMap = new Map();
+const suggestMap = new Map();
+
 /**
  * @author - Aisen Kim
  * @brief - Returns an array of suggested word completions
@@ -31,6 +34,9 @@ const esClient = elasticSearch.Client({
  */
 suggest = async (req, res) => {
   const searchText = req.query.q;
+  if(suggestMap.has(searchText.trim())) {
+    return res.json(suggestMap.get(searchText.trim()));
+  }
   esClient
     .search({
       index: "gdoc",
@@ -60,6 +66,7 @@ suggest = async (req, res) => {
           resultArr.push(word.text);
         }
       });
+      suggestMap.set(searchText.trim(), resultArr);
       return res.json(resultArr);
     })
     .catch((err) => {
@@ -93,6 +100,9 @@ getDocEs = async (req, res) => {
   //   console.log(returnJson);
   //   return res.json(returnJson.result);
   // }
+  if(searchMap.has(searchText.trim())) {
+    return res.json(searchMap.get(searchText.trim()));
+  }
   esClient
     .search({
       index: "gdoc",
@@ -131,7 +141,7 @@ getDocEs = async (req, res) => {
       });
 
       // cacheQueue.push({ key: searchText.trim(), value: resultArr });
-
+      searchMap.set(searchText.trim(), resultArr);
       return res.json(resultArr);
     })
     .catch((err) => {
