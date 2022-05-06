@@ -8,5 +8,51 @@ services:
     environment:
       PORT: 10100
     ports:
-      - "10100-10104:10100"
-    scale: 5
+      - "10100-10101:10100"
+    scale: 2
+
+  gdoc8:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6005
+    environment:
+      PORT: 6007
+    ports:
+      - "6007:6007"
+    networks:
+      - mongo-compose-network
+  sharedb8:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8087
+    environment:
+      PORT: 8087
+    ports:
+      - "8087:8087"
+    networks:
+      - mongo-compose-network
+  gdoc9:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6008
+    environment:
+      PORT: 6008
+    ports:
+      - "6008:6008"
+    networks:
+      - mongo-compose-network
+  sharedb9:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8088
+    environment:
+      PORT: 8088
+    ports:
+      - "8088:8088"
+    networks:
+      - mongo-compose-network
+

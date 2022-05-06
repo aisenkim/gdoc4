@@ -108,6 +108,8 @@ createDoc = async (req, res) => {
     socket = new WebSocket(`ws://sharedb7:8086?document=${newDocId}`);
   } else if (localPort == 6007) {
     socket = new WebSocket(`ws://sharedb8:8087?document=${newDocId}`);
+  } else if (localPort == 6008) {
+    socket = new WebSocket(`ws://sharedb9:8088?document=${newDocId}`);
   }
 
   const connection = new Sharedb.Connection(socket);
