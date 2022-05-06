@@ -9,6 +9,7 @@ const { stripHtml } = require("string-strip-html");
 const { createDocEs } = require("./elasticSearchController");
 const { setIntervalAsync } = require("set-interval-async/dynamic");
 const Redis = require("redis");
+const axios = require("axios");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -359,12 +360,23 @@ submitDeltaOp = async (req, res) => {
 };
 
 setIntervalAsync(async () => {
+  let queue = []
   for (let docId of docUpdateSet) {
     const contentStr = await getDocHtmlWithNoTag(docId);
-    await createDocEs(docId, docNameMap.get(docId), contentStr);
+    queue.push({docId, docName: docNameMap.get(docId), contentStr})
+    // await createDocEs(docId, docNameMap.get(docId), contentStr);
     docUpdateSet.delete(docId);
   }
-}, 4000);
+  // make async call
+  await axios.post("209.151.152.132:4600", {queue});
+}, 3000);
+// setIntervalAsync(async () => {
+//   for (let docId of docUpdateSet) {
+//     const contentStr = await getDocHtmlWithNoTag(docId);
+//     await createDocEs(docId, docNameMap.get(docId), contentStr);
+//     docUpdateSet.delete(docId);
+//   }
+// }, 3000);
 
 /**
  * req.body - { index, length }

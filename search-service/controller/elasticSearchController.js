@@ -1,11 +1,11 @@
 const elasticSearch = require("elasticsearch");
-const { setIntervalAsync } = require("set-interval-async/dynamic");
-const Redis = require("redis");
 const esClient = elasticSearch.Client({
   // host: "http://elasticsearch:9200"
   host: "http://209.151.151.187:9200"
   // host: "https://elastic:dMmtWsO5I9nIHBN3dquUPzhD@gdoc.es.us-east-1.aws.found.io:9243",
 });
+const Redis = require("redis");
+const { setIntervalAsync } = require("set-interval-async/dynamic");
 // const  Client = require('@elastic/elasticsearch').Client
 // const esClient = new Client({
 //   cloud: { id: '90691e1ab0ef46259faad57b4bb8c498' },
@@ -207,6 +207,15 @@ createDocEsCall = async (req, res) => {
   }
   return res.json({ status: "OK" });
 };
+
+
+// setIntervalAsync(async () => {
+//   for (let docId of docUpdateSet) {
+//     const contentStr = await getDocHtmlWithNoTag(docId);
+//     await createDocEs(docId, docNameMap.get(docId), contentStr);
+//     docUpdateSet.delete(docId);
+//   }
+// }, 4000);
 
 module.exports = {
   getDocEs,

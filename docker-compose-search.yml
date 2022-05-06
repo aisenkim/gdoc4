@@ -10,7 +10,15 @@ services:
     ports:
       - "10100-10100:10100"
     scale: 1
-
+  indexer:
+    build:
+      context: ./search-indexer
+      args:
+        PORT: 4600
+    environment:
+      PORT: 4600
+    ports:
+      - "4600:4600"
   gdoc8:
     build:
       context: ./gdoc-service
