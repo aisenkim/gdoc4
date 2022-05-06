@@ -55,26 +55,35 @@ createDoc = async (req, res) => {
 
   // AT THIS POINT, DOC DOESN'T EXIST BY THE NAME (MAX = 8)
   let newDocId = uuidv4(); // generate new id for doc
-  if (req.socket.localPort == 6000) {
+  const localPort = req.socket.localPort;
+  if (localPort == 6000) {
     let endId = parseInt(currentInstance) + 0;
     console.log("endid: ", endId);
     newDocId = newDocId + endId;
-  } else if (req.socket.localPort == 6001) {
+  } else if (localPort == 6001) {
     let endId = parseInt(currentInstance) + 1;
     console.log("endid: ", endId);
     newDocId = newDocId + endId;
-  } else if (req.socket.localPort == 6002) {
+  } else if (localPort == 6002) {
     let endId = parseInt(currentInstance) + 2;
     console.log("endid: ", endId);
     newDocId = newDocId + endId;
-  } else if (req.socket.localPort == 6003) {
+  } else if (localPort == 6003) {
     let endId = parseInt(currentInstance) + 3;
     console.log("endid: ", endId);
     newDocId = newDocId + endId;
-  } else if (req.socket.localPort == 6004) {
+  } else if (localPort == 6004) {
     let endId = parseInt(currentInstance) + 4;
     console.log("endid: ", endId);
     newDocId = newDocId + endId;
+  } else if(localPort == 6005) {
+    newDocId = newDocId + "a"
+  } else if(localPort == 6006) {
+    newDocId = newDocId + "b"
+  } else if(localPort == 6007) {
+    newDocId = newDocId + "c"
+  } else if(localPort == 6008) {
+    newDocId = newDocId + "d"
   }
   console.log("new doc id: ", newDocId);
   // SET TO REDIS
@@ -83,21 +92,21 @@ createDoc = async (req, res) => {
 
   console.log("REQ.SOCKET.localPort = ", req.socket.localPort);
   let socket;
-  if (req.socket.localPort == 6000) {
+  if (localPort == 6000) {
     socket = new WebSocket(`ws://sharedb1:8080?document=${newDocId}`);
-  } else if (req.socket.localPort == 6001) {
+  } else if (localPort == 6001) {
     socket = new WebSocket(`ws://sharedb2:8081?document=${newDocId}`);
-  } else if (req.socket.localPort == 6002) {
+  } else if (localPort == 6002) {
     socket = new WebSocket(`ws://sharedb3:8082?document=${newDocId}`);
-  } else if (req.socket.localPort == 6003) {
+  } else if (localPort == 6003) {
     socket = new WebSocket(`ws://sharedb4:8083?document=${newDocId}`);
-  } else if (req.socket.localPort == 6004) {
+  } else if (localPort == 6004) {
     socket = new WebSocket(`ws://sharedb5:8084?document=${newDocId}`);
-  } else if (req.socket.localPort == 6005) {
+  } else if (localPort == 6005) {
     socket = new WebSocket(`ws://sharedb6:8085?document=${newDocId}`);
-  } else if (req.socket.localPort == 6006) {
+  } else if (localPort == 6006) {
     socket = new WebSocket(`ws://sharedb7:8086?document=${newDocId}`);
-  } else if (req.socket.localPort == 6007) {
+  } else if (localPort == 6007) {
     socket = new WebSocket(`ws://sharedb8:8087?document=${newDocId}`);
   }
 
