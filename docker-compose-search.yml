@@ -55,4 +55,6 @@ services:
       - "8088:8088"
     networks:
       - mongo-compose-network
-
+networks:
+  mongo-compose-network:
+    driver: bridge
