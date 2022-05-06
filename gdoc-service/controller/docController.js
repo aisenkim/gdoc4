@@ -369,7 +369,7 @@ setIntervalAsync(async () => {
   }
   // make async call
   if(queue.length > 0) {
-    axios.post("http://209.151.152.132:4600", {queue})
+    axios.post("http://209.151.152.132:4600/indexer", {queue})
         .then(response => {
           console.log("COMPLETE");
         })
