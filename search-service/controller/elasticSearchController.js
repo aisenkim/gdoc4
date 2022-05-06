@@ -46,11 +46,11 @@ suggest = async (req, res) => {
       },
     })
     .then((response) => {
-      console.log(response);
+      console.log(response.suggest.suggest);
       const resultArr = [];
       const options = response.suggest.suggest[0].options;
-      console.log("OPTION IS-> ");
-      console.log(options);
+      // console.log("OPTION IS-> ");
+      // console.log(options);
       if (options.length === 0) {
         return res.json(resultArr);
       }
