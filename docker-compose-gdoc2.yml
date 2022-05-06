@@ -11,15 +11,15 @@ services:
       - "6005:6005"
     networks:
       - mongo-compose-network
-  sharedb1:
+  sharedb6:
     build:
       context: ./sharedb-server
       args:
-        PORT: 8080
+        PORT: 8085
     environment:
-      PORT: 8080
+      PORT: 8085
     ports:
-      - "8080:8080"
+      - "8085:8085"
     networks:
       - mongo-compose-network
   gdoc2:
@@ -33,15 +33,15 @@ services:
       - "6006:6006"
     networks:
       - mongo-compose-network
-  sharedb2:
+  sharedb7:
     build:
       context: ./sharedb-server
       args:
-        PORT: 8081
+        PORT: 8086
     environment:
-      PORT: 8081
+      PORT: 8086
     ports:
-      - "8081:8081"
+      - "8086:8086"
     networks:
       - mongo-compose-network
 networks:
