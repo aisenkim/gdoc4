@@ -12,9 +12,9 @@ const esClient = elasticSearch.Client({
 //   auth: { apiKey: 'Mnh2NWdvQUJQVDFLVzJMOENIRXM6cDRXUk1OYzhTUi1sREstM1o2SXlWQQ==' }
 // })
 
-const cacheQueue = [];
-const redisClient = Redis.createClient({ url: "redis://209.94.58.216:6379" });
-redisClient.connect();
+// const cacheQueue = [];
+// const redisClient = Redis.createClient({ url: "redis://209.94.58.216:6379" });
+// redisClient.connect();
 
 /**
  * @author - Aisen Kim
@@ -86,14 +86,13 @@ suggest = async (req, res) => {
 getDocEs = async (req, res) => {
   const searchText = req.query.q;
   console.log(searchText);
-  const redisResult = await redisClient.get(searchText.trim());
-  // if result exists send the value cached
-  if (redisResult) {
-    const returnJson = JSON.parse(redisResult);
-    console.log("VAALUE TO RETURN IS: ");
-    console.log(returnJson);
-    return res.json(returnJson.result);
-  }
+  // const redisResult = await redisClient.get(searchText.trim());
+  // if (redisResult) {
+  //   const returnJson = JSON.parse(redisResult);
+  //   console.log("VAALUE TO RETURN IS: ");
+  //   console.log(returnJson);
+  //   return res.json(returnJson.result);
+  // }
   esClient
     .search({
       index: "gdoc",
@@ -131,7 +130,7 @@ getDocEs = async (req, res) => {
         });
       });
 
-      cacheQueue.push({ key: searchText.trim(), value: resultArr });
+      // cacheQueue.push({ key: searchText.trim(), value: resultArr });
 
       return res.json(resultArr);
     })
@@ -145,15 +144,15 @@ getDocEs = async (req, res) => {
 };
 
 // KEY - query, Value - value
-setIntervalAsync(async () => {
-  for (let queryObj of cacheQueue) {
-    if (queryObj.value.length > 0) {
-      let result = JSON.stringify({ result: queryObj.value });
-      await redisClient.set(queryObj.key, result);
-    }
-    cacheQueue.shift();
-  }
-}, 7000);
+// setIntervalAsync(async () => {
+//   for (let queryObj of cacheQueue) {
+//     if (queryObj.value.length > 0) {
+//       let result = JSON.stringify({ result: queryObj.value });
+//       await redisClient.set(queryObj.key, result);
+//     }
+//     cacheQueue.shift();
+//   }
+// }, 7000);
 
 createDocEs = async (id, name, content) => {
   console.log("ID: ", id);
