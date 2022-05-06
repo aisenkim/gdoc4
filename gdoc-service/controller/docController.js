@@ -231,22 +231,6 @@ deleteDoc = async (req, res) => {
  */
 listDoc = async (req, res) => {
   res.set("X-CSE356", "61f9c246ca96e9505dd3f812");
-  console.log("USER NAME IS: ");
-  console.log(req.session.name);
-
-  // const list = await redisLocal.lRange("recentDoc", 0, 9);
-  // const result = []
-  // for(docId of list) {
-  //   let docName = await redisLocal.get(docId)
-  //   result.push({
-  //     docid: docId,
-  //     name: docName
-  //   })
-  // }
-  // console.log("Documents returned from redis: ")
-  // console.log(result)
-  // return res.json(result);
-
   const documents = await Document.find().sort({ updatedAt: -1 }).limit(10);
   const list = [];
   documents.forEach((document) => {
@@ -286,8 +270,6 @@ getDocument = async (req, res) => {
   // CHECK IF DOCUMENT HAS BEEN OPENED PREVIOUSLY
   const documentExists = docMap.has(docId);
   if (!documentExists) {
-    console.log(docId);
-    console.log(docMap);
     return res.json({
       error: true,
       message: `Document by the id: ${docId} doesn't exist -> get document`,
@@ -340,9 +322,6 @@ submitDeltaOp = async (req, res) => {
 
   const { version, op } = req.body;
 
-  console.log("The OP is --> ");
-  console.log(op);
-
   // CHECK IF VERSION MATCH (SERVER'S VERSION AHEAD OF CLIENT)
   if (version && localVersion > version)
     return res.json({
@@ -385,7 +364,7 @@ setIntervalAsync(async () => {
     await createDocEs(docId, docNameMap.get(docId), contentStr);
     docUpdateSet.delete(docId);
   }
-}, 2500);
+}, 10000);
 
 /**
  * req.body - { index, length }
