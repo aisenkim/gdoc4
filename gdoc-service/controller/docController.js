@@ -375,7 +375,7 @@ setIntervalAsync(async () => {
         })
         .catch(err=>console.log(err));
   }
-}, 2000);
+}, 5000);
 // setIntervalAsync(async () => {
 //   for (let docId of docUpdateSet) {
 //     const contentStr = await getDocHtmlWithNoTag(docId);
