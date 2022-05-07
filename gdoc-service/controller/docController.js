@@ -85,6 +85,8 @@ createDoc = async (req, res) => {
         newDocId = newDocId + "c"
     } else if (localPort == 6008) {
         newDocId = newDocId + "d"
+    } else if (localPort == 6009) {
+        newDocId = newDocId + "e"
     }
     console.log("new doc id: ", newDocId);
     // SET TO REDIS
@@ -109,7 +111,7 @@ createDoc = async (req, res) => {
         socket = new WebSocket(`ws://sharedb7:8086?document=${newDocId}`);
     } else if (localPort == 6007) {
         socket = new WebSocket(`ws://sharedb8:8087?document=${newDocId}`);
-    } else if (localPort == 6008) {
+    } else if (localPort == 6008 || localPort == 6009) {
         socket = new WebSocket(`ws://sharedb9:8088?document=${newDocId}`);
     }
 
@@ -362,7 +364,9 @@ submitDeltaOp = async (req, res) => {
 let indexerUrl = [
     "http://209.151.155.151:4600/indexer",
     "http://209.151.155.151:4602/indexer",
-    "http://209.151.155.151:4601/indexer"
+    "http://209.151.155.151:4601/indexer",
+    "http://209.151.155.151:4603/indexer",
+    "http://209.151.155.151:4604/indexer"
 ];
 
 setIntervalAsync(async () => {
@@ -375,14 +379,14 @@ setIntervalAsync(async () => {
     }
     // make async call
     if (queue.length > 0) {
-        let idx = Math.floor(Math.random() * 3);
+        let idx = Math.floor(Math.random() * 5);
         axios.post(indexerUrl[idx], {queue})
             .then(response => {
                 console.log("COMPLETE");
             })
             .catch(err => console.log(err));
     }
-}, 2000);
+}, 4000);
 // setIntervalAsync(async () => {
 //   for (let docId of docUpdateSet) {
 //     const contentStr = await getDocHtmlWithNoTag(docId);

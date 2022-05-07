@@ -37,6 +37,24 @@ services:
       PORT: 4602
     ports:
       - "4602:4602"
+  indexer4:
+    build:
+      context: ./search-indexer
+      args:
+        PORT: 4603
+    environment:
+      PORT: 4603
+    ports:
+      - "4603:4603"
+  indexer5:
+    build:
+      context: ./search-indexer
+      args:
+        PORT: 4604
+    environment:
+      PORT: 4604
+    ports:
+      - "4604:4604"
 networks:
   mongo-compose-network:
     driver: bridge
