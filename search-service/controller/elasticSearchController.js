@@ -1,7 +1,7 @@
 const elasticSearch = require("elasticsearch");
 const esClient = elasticSearch.Client({
   // host: "http://elasticsearch:9200"
-  host: "http://209.151.151.187:9200"
+  host: "http://209.94.56.159:9200"
   // host: "https://elastic:dMmtWsO5I9nIHBN3dquUPzhD@gdoc.es.us-east-1.aws.found.io:9243",
 });
 const Redis = require("redis");

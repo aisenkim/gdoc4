@@ -1,40 +1,28 @@
 upstream docservice{
-	server 209.151.154.162:6000;
-	server 127.0.0.1:6000;
-	server 194.113.73.119:6005;
-	server 209.151.152.132:6007;
-	server 209.151.154.162:6001;
-	server 194.113.73.119:6006;
-	server 209.151.154.162:6002;
-	server 127.0.0.1:6001;
-	server 209.151.154.162:6003;
-	server 127.0.0.1:6002;
-	server 209.151.154.162:6004;
-	server 209.151.152.132:6008;
+	server 194.113.75.41:6000;
+	server 194.113.75.41:6001;
+	server 194.113.75.41:6002;
+	server 194.113.75.41:6003;
+	server 194.113.75.41:6004;
+	server 194.113.75.41:6005;
+	server 194.113.75.41:6006;
+	server 194.113.75.41:6007;
 }
 
 upstream docCreate {
-	server 209.151.154.162:6000;
-	server 127.0.0.1:6000;
-	server 194.113.73.119:6005;
-	server 209.151.152.132:6007;
-	server 209.151.154.162:6001;
-	server 194.113.73.119:6006;
-	server 209.151.154.162:6002;
-	server 127.0.0.1:6001;
-	server 209.151.154.162:6003;
-	server 127.0.0.1:6002;
-	server 209.151.154.162:6004;
-	server 209.151.152.132:6008;
+	server 194.113.75.41:6000;
+	server 194.113.75.41:6001;
+	server 194.113.75.41:6002;
+	server 194.113.75.41:6003;
+	server 194.113.75.41:6004;
+	server 194.113.75.41:6005;
+	server 194.113.75.41:6006;
+	server 194.113.75.41:6007;
 }
 
 
 upstream search {
-	server 209.151.152.132:10100;
-	#server 209.151.152.132:10101;
-	#server 209.151.152.132:10102;
-	#server 209.151.152.132:10103;
-	#server 209.151.152.132:10104;
+	server 209.151.155.151:10100;
 }
 
 server {
@@ -132,7 +120,7 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://localhost:6000;
+                proxy_pass         http://194.113.75.41:6000;
 	}
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*1\/.*) {
 		proxy_set_header Connection '';
@@ -141,7 +129,7 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://localhost:6001;
+                proxy_pass         http://194.113.75.41:6001;
 	}
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*2\/.*) {
 		proxy_set_header Connection '';
@@ -150,7 +138,7 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://localhost:6002;
+                proxy_pass         http://194.113.75.41:6002;
 	}
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*3\/.*) {
 		proxy_set_header Connection '';
@@ -159,7 +147,7 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.154.162:6000;
+                proxy_pass         http://194.113.75.41:6003;
 	}
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*4\/.*) {
 		proxy_set_header Connection '';
@@ -168,45 +156,8 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.154.162:6001;
+                proxy_pass         http://194.113.75.41:6004;
 	}
-	location ~ ^/(doc)/(op|connect|presence|get)/(.*5\/.*) {
-		proxy_set_header Connection '';
-		proxy_http_version 1.1;
-		chunked_transfer_encoding off;
-		proxy_connect_timeout 3000s;
-    		proxy_send_timeout 3000;
-    		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.154.162:6002;
-	}
-	location ~ ^/(doc)/(op|connect|presence|get)/(.*6\/.*) {
-		proxy_set_header Connection '';
-		proxy_http_version 1.1;
-		chunked_transfer_encoding off;
-		proxy_connect_timeout 3000s;
-    		proxy_send_timeout 3000;
-    		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.154.162:6003;
-	}
-	location ~ ^/(doc)/(op|connect|presence|get)/(.*7\/.*) {
-		proxy_set_header Connection '';
-		proxy_http_version 1.1;
-		chunked_transfer_encoding off;
-		proxy_connect_timeout 3000s;
-    		proxy_send_timeout 3000;
-    		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.154.162:6004;
-	}
-	location ~ ^/(doc)/(op|connect|presence|get)/(.*8\/.*) {
-		proxy_set_header Connection '';
-		proxy_http_version 1.1;
-		chunked_transfer_encoding off;
-		proxy_connect_timeout 3000s;
-    		proxy_send_timeout 3000;
-    		proxy_read_timeout 3000;
-                proxy_pass         http://209.94.59.200:6000;
-	}
-
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*a\/.*) {
 		proxy_set_header Connection '';
 		proxy_http_version 1.1;
@@ -214,9 +165,8 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://194.113.73.119:6005;
+                proxy_pass         http://194.113.75.41:6005;
 	}
-
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*b\/.*) {
 		proxy_set_header Connection '';
 		proxy_http_version 1.1;
@@ -224,9 +174,8 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://194.113.73.119:6006;
+                proxy_pass         http://194.113.75.41:6006;
 	}
-
 	location ~ ^/(doc)/(op|connect|presence|get)/(.*c\/.*) {
 		proxy_set_header Connection '';
 		proxy_http_version 1.1;
@@ -234,17 +183,7 @@ server {
 		proxy_connect_timeout 3000s;
     		proxy_send_timeout 3000;
     		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.152.132:6007;
-	}
-
-	location ~ ^/(doc)/(op|connect|presence|get)/(.*d\/.*) {
-		proxy_set_header Connection '';
-		proxy_http_version 1.1;
-		chunked_transfer_encoding off;
-		proxy_connect_timeout 3000s;
-    		proxy_send_timeout 3000;
-    		proxy_read_timeout 3000;
-                proxy_pass         http://209.151.152.132:6008;
+                proxy_pass         http://194.113.75.41:6007;
 	}
 
 

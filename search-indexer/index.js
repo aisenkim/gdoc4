@@ -4,7 +4,7 @@ const dotenv = require('dotenv')
 const { setIntervalAsync } = require("set-interval-async/dynamic");
 const elasticSearch = require("elasticsearch");
 const esClient = elasticSearch.Client({
-    host: "http://209.151.151.187:9200"
+    host: "http://209.94.56.159:9200"
 });
 dotenv.config()
 
