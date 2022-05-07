@@ -132,6 +132,50 @@ services:
       - "8085:8085"
     networks:
       - mongo-compose-network
+  gdoc7:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6006
+    environment:
+      PORT: 6006
+    ports:
+      - "6006:6006"
+    networks:
+      - mongo-compose-network
+  sharedb7:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8086
+    environment:
+      PORT: 8086
+    ports:
+      - "8086:8086"
+    networks:
+      - mongo-compose-network
+  gdoc8:
+    build:
+      context: ./gdoc-service
+      args:
+        PORT: 6007
+    environment:
+      PORT: 6007
+    ports:
+      - "6007:6007"
+    networks:
+      - mongo-compose-network
+  sharedb8:
+    build:
+      context: ./sharedb-server
+      args:
+        PORT: 8087
+    environment:
+      PORT: 8087
+    ports:
+      - "8087:8087"
+    networks:
+      - mongo-compose-network
 networks:
   mongo-compose-network:
     driver: bridge
