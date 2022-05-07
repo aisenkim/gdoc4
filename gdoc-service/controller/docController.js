@@ -359,6 +359,8 @@ submitDeltaOp = async (req, res) => {
   return res.json({ status: "ok" });
 };
 
+let indexerUrl = ["http://209.151.152.132:4600/indexer", "http://194.113.73.119:4602/indexer", "http://194.113.73.119:4601/indexer"];
+
 setIntervalAsync(async () => {
   let queue = []
   for (let docId of docUpdateSet) {
@@ -369,13 +371,14 @@ setIntervalAsync(async () => {
   }
   // make async call
   if(queue.length > 0) {
-    axios.post("http://209.151.152.132:4600/indexer", {queue})
+    let idx = Math.floor(Math.random() * 3);
+    axios.post(indexerUrl[idx], {queue})
         .then(response => {
           console.log("COMPLETE");
         })
         .catch(err=>console.log(err));
   }
-}, 5000);
+}, 4000);
 // setIntervalAsync(async () => {
 //   for (let docId of docUpdateSet) {
 //     const contentStr = await getDocHtmlWithNoTag(docId);

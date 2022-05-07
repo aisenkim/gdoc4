@@ -44,6 +44,24 @@ services:
       - "8086:8086"
     networks:
       - mongo-compose-network
+  indexer1:
+    build:
+      context: ./search-indexer
+      args:
+        PORT: 4601
+    environment:
+      PORT: 4601
+    ports:
+      - "4601:4601"
+  indexer2:
+    build:
+      context: ./search-indexer
+      args:
+        PORT: 4602
+    environment:
+      PORT: 4602
+    ports:
+      - "4602:4602"
 networks:
   mongo-compose-network:
     driver: bridge
