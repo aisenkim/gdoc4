@@ -50,7 +50,7 @@ setIntervalAsync(async () => {
     await createDocEs(request.docId, request.docName, request.contentStr);
     requestQueue.shift();
   }
-}, 50);
+}, 10);
 
 
 // app.listen(PORT, () => {
