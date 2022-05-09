@@ -176,9 +176,9 @@ getDocEs = async (req, res) => {
         .then(async (response) => {
             const resultArr = [];
             // response.hits.hits -> array of matching object form
-            console.log(response.hits.hits);
-            console.log(response.hits.hits[0].highlight.content);
-            console.log(response.hits.hits[0].highlight.content[0]);
+            // console.log(response.hits.hits);
+            // console.log(response.hits.hits[0].highlight.content);
+            // console.log(response.hits.hits[0].highlight.content[0]);
             response.hits.hits.forEach((hit) => {
                 // resultArr.push({docid: hit._id, name: hit._source.name, snippet: hit.highlight.content[0]})
                 resultArr.push({
