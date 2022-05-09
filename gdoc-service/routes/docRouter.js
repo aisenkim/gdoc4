@@ -6,13 +6,13 @@ const Auth = require("../middleware/authMiddleware")
 const docController = require("../controller/docController")
 const {Doc} = require("sharedb/lib/client");
 
-router.post("/delete",  DocController.deleteDoc)
+router.post("/delete", Auth.isAuthenticated, DocController.deleteDoc)
 router.post("/create", Auth.isAuthenticated, DocController.createDoc)
 router.get("/list", Auth.isAuthenticated, DocController.listDoc)
 router.get("/connect/:DOCID/:UID", Auth.isAuthenticated, DocController.getDocument)
-router.post("/op/:DOCID/:UID",  DocController.submitDeltaOp)
+router.post("/op/:DOCID/:UID", Auth.isAuthenticated, DocController.submitDeltaOp)
 router.get("/get/:DOCID/:UID", Auth.isAuthenticated, DocController.getDocHtml)
-router.post("/presence/:DOCID/:UID", DocController.submitPresence)
+router.post("/presence/:DOCID/:UID", Auth.isAuthenticated, DocController.submitPresence)
 router.get("/notag/get/:DOCID/:UID", DocController.getDocHtmlWithNoTag)
 
 module.exports = router;
