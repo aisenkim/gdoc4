@@ -84,6 +84,7 @@ suggest = async (req, res) => {
     if (suggestMap.has(searchText.trim())) {
         return res.json(suggestMap.get(searchText.trim()));
     }
+    const searchTermTrimmed = searchText.trim();
     esClient
         .search({
             index: "gdoc",
@@ -91,7 +92,11 @@ suggest = async (req, res) => {
                 size: 10,
                 query: {
                     fuzzy: {
-                        content: {value: searchText.trim()}
+                        content: {
+                            value: searchTermTrimmed,
+                            prefix_length: searchTermTrimmed.length - 1,
+                            transpositions: false
+                        }
                     },
                 },
                 highlight: {
